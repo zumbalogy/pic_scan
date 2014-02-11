@@ -1,7 +1,7 @@
-<%= image_tag("cube.jpg", id: 'scream') %>
+<%= image_tag("rainbow.jpg", id: 'scream') %>
 
 
-<canvas id="myCanvas" width="600" height="600">error</canvas>
+<canvas id="myCanvas" width="457px" height="457px">error</canvas>
 
 <script>
 
@@ -15,30 +15,40 @@ document.getElementById("scream").onload=function(){
     ctx.drawImage(img,0,0);
 
     var imgData = ctx.getImageData(0,0,can.width,can.height);
+    var save = imgData;
 
     var o = audio_context.createOscillator();
     o.frequency.value = 400;
     o.connect(audio_context.destination);
     o.noteOn(0);
 
-    // for (var i=0;i<imgData.data.length;i+=4){
-    //     o.frequency.value = imgData.data[i] * 5;
-    // };
-
-    function myLoop(i){
-        setTimeout(function(){
-            o.frequency.value = imgData.data[i] * 5;
-            if(--i) myLoop(i);
-        }, 50)
+    console.log(imgData.data);
+    for (var i=0;i<imgData.data.length;i+=4){
+        console.log(imgData.data[i+2]);
+        o.frequency.value = (imgData.data[i+2] * 4);
+        imgData.data[i]   = 255 - imgData.data[i];
+        imgData.data[i+1] = 255 - imgData.data[i+2];
+        imgData.data[i+2] = 255 - imgData.data[i+2];
+        imgData.data[i+3] = 255;
     };
-    myLoop(imgData.data.length);
+
+    // function myLoop(i){
+    //     setTimeout(function(i){
+    //         o.frequency.value = imgData.data[2400 - i] * 5;
+    //         if (i > 0) { 
+    //             myLoop(i-4) 
+    //         };
+    //         console.log('test')
+    //     }, 1)
+    // };
+    // myLoop(600 * 4);
 
     o.noteOff(0);
     ctx.putImageData(imgData,0,0)
 }
 </script>
-<!-- 
-        if (i % 8 == 0 || i % 12 == 0) {
+
+<!--         if (i % 8 == 0 || i % 12 == 0) {
             imgData.data[i]   = 255 - imgData.data[i];
             imgData.data[i+1] = 255 - imgData.data[i + 1];
             imgData.data[i+2] = 255 - imgData.data[i + 2];
