@@ -1,7 +1,7 @@
-<%= image_tag("rainbow.jpg", id: 'scream') %>
+<%= image_tag("grad.jpg", id: 'scream') %>
 
 
-<canvas id="myCanvas" width="457px" height="457px">error</canvas>
+<canvas id="myCanvas" width="501px" height="340px">error</canvas>
 
 <script>
 
@@ -25,9 +25,9 @@ document.getElementById("scream").onload=function(){
     console.log(imgData.data);
     for (var i=0;i<imgData.data.length;i+=4){
         console.log(imgData.data[i+2]);
-        o.frequency.value = (imgData.data[i+2] * 4);
+        o.frequency.value = (imgData.data[i] * 4);
         imgData.data[i]   = 255 - imgData.data[i];
-        imgData.data[i+1] = 255 - imgData.data[i+2];
+        imgData.data[i+1] = 255 - imgData.data[i+i];
         imgData.data[i+2] = 255 - imgData.data[i+2];
         imgData.data[i+3] = 255;
     };
