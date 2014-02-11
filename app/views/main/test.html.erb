@@ -1,7 +1,8 @@
-<%= image_tag("grad.jpg", id: 'scream') %>
+
+<%= image_tag("yellow.jpg", id: 'scream') %>
 
 
-<canvas id="myCanvas" width="501px" height="340px">error</canvas>
+<canvas id="myCanvas" width="300px" height="700px">error</canvas>
 
 <script>
 
@@ -18,16 +19,16 @@ document.getElementById("scream").onload=function(){
     var save = imgData;
 
     var o = audio_context.createOscillator();
-    o.frequency.value = 400;
+    o.frequency.value = 40;
     o.connect(audio_context.destination);
     o.noteOn(0);
 
     console.log(imgData.data);
     for (var i=0;i<imgData.data.length;i+=4){
-        console.log(imgData.data[i+2]);
+        console.log(0);
         o.frequency.value = (imgData.data[i] * 4);
         imgData.data[i]   = 255 - imgData.data[i];
-        imgData.data[i+1] = 255 - imgData.data[i+i];
+        imgData.data[i+1] = 255 - imgData.data[i+1];
         imgData.data[i+2] = 255 - imgData.data[i+2];
         imgData.data[i+3] = 255;
     };
